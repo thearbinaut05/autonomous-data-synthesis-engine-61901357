@@ -1,0 +1,30 @@
+# Deployment Configuration for data-synthesis-engine
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-synthesis-engine
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: data-synthesis-engine
+  template:
+    metadata:
+      labels:
+        app: data-synthesis-engine
+    spec:
+      containers:
+      - name: data-synthesis-engine
+        image: data-synthesis-engine:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
